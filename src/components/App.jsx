@@ -9,12 +9,15 @@ const { useState, useEffect } = React;
 var App = () => {
 
   const [videos, setVideos] = useState([]);
-  const [currentVideo, setCurrentVideo] = useState(exampleVideoData[0]);
+  const [currentVideo, setCurrentVideo] = useState();
   const [search, setSearch] = useState('');
+  const [toggle, setToggle] = useState(false);
 
   useEffect(() => {
     searchYouTube(search, (data) => {
+      console.log({data});
       setVideos(data);
+      setCurrentVideo(data[0]);
     });
   }, [search]
   );
@@ -36,7 +39,7 @@ var App = () => {
       </nav>
       <div className="row">
         <div className="col-md-7">
-          <VideoPlayer video={currentVideo || exampleVideoData[0]}/>
+          <VideoPlayer setToggle={setToggle} toggle={toggle} video={currentVideo || exampleVideoData[0]}/>
         </div>
         <div className="col-md-5">
           <VideoList selectVideo={selectCurrentVideo} videos={videos || exampleVideoData}/>

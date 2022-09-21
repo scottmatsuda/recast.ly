@@ -11,6 +11,7 @@ var searchYouTube = (query, callback) => {
     url: endpoint,
     type: 'GET',
     data: {
+      // eslint-disable-next-line camelcase
       youtube_api_key: YOUTUBE_API_KEY,
       q: query,
       part: 'snippet',
